@@ -1,0 +1,74 @@
+@import "../../../styles";
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+:host {
+  color: @brown-color;
+}
+
+.wrapper {
+  width: 580px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 44px;
+  margin-bottom: 25px;
+}
+
+label {
+  color: @brown-color;
+}
+
+button {
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+[tuiAppearance][data-appearance='beige-button'] {
+  color: @brown-color;
+  background: @beige-color;
+
+  .appearance-hover({
+    color: @brown-color;
+    background:@light-beige-color;
+  });
+
+  .appearance-active({
+    color: @white-color;
+    background: @brown-color;
+  });
+}
+
+input {
+  border: 1px solid @beige-color !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px
+}
+
+.forgot-password {
+  margin-top: 8px;
+}
+
+.link {
+  text-decoration: underline @brown-color;
+  cursor: pointer;
+}

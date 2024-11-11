@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <div class="title">Войти</div>
+  <div class="form">
+    <label tuiLabel>
+      Почта
+      <tui-textfield>
+        <input
+          tuiTextfield
+          type="email"
+          [(ngModel)]="value"
+        />
+      </tui-textfield>
+    </label>
+    <div>
+    <label tuiLabel>
+      Пароль
+      <tui-textfield>
+        <input
+          tuiTextfield
+          type="password"
+          [(ngModel)]="value"
+        />
+      </tui-textfield>
+    </label>
+    <div class="forgot-password link">Забыли пароль?</div>
+    </div>
+    <div>Еще не имеете аккаунт? <span class="link">Зарегистрируйтесь</span></div>
+    <button
+      size="l"
+      tuiButton
+      type="button"
+      appearance="beige-button"
+    >
+      Large
+    </button>
+  </div>
+</div>

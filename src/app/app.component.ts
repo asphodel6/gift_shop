@@ -10,5 +10,4 @@ import {TuiRoot} from '@taiga-ui/core';
   styleUrl: './app.component.less'
 })
 export class AppComponent {
-  title = 'gift_shop';
 }
