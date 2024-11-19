@@ -8,10 +8,13 @@ import {
 } from '@taiga-ui/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TuiPassword} from '@taiga-ui/kit';
+import {
+  TuiInputDateModule, TuiTextfieldControllerModule
+} from '@taiga-ui/legacy';
 import {RouterLink} from '@angular/router';
 
 @Component({
-  selector: 'login',
+  selector: 'registration',
   standalone: true,
   imports: [
     TuiTextfieldComponent,
@@ -21,22 +24,28 @@ import {RouterLink} from '@angular/router';
     TuiTextfieldDirective,
     TuiPassword,
     TuiButton,
+    TuiInputDateModule,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TuiTextfieldControllerModule
   ],
   providers: [],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.less'
+  templateUrl: './registration.component.html',
+  styleUrl: './registration.component.less'
 })
-export class LoginComponent {
+export class RegistrationComponent {
   private fb = inject(FormBuilder);
 
-  loginForm: FormGroup = this.fb.group({
+  registrationForm: FormGroup = this.fb.group({
+    secondName: ['', [Validators.required]],
+    firstName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(7)]]
+    dateOfBirth: [null, [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(7)]],
+    repeatPassword: ['', [Validators.required, Validators.minLength(7)]],
   });
 
   onSubmit(): void {
-    console.log(this.loginForm.value);
+    console.log(this.registrationForm.value);
   }
 }

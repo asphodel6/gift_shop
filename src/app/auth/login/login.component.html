@@ -1,13 +1,13 @@
 <div class="wrapper">
   <div class="title">Войти</div>
-  <div class="form">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label tuiLabel>
       Почта
       <tui-textfield>
         <input
           tuiTextfield
           type="email"
-          [(ngModel)]="value"
+          formControlName="email"
         />
       </tui-textfield>
     </label>
@@ -18,20 +18,21 @@
         <input
           tuiTextfield
           type="password"
-          [(ngModel)]="value"
+          formControlName="password"
         />
       </tui-textfield>
     </label>
     <div class="forgot-password link">Забыли пароль?</div>
     </div>
-    <div>Еще не имеете аккаунт? <span class="link">Зарегистрируйтесь</span></div>
+    <div>Еще не имеете аккаунт? <a class="link" routerLink="/registration">Зарегистрируйтесь</a></div>
     <button
       size="l"
       tuiButton
-      type="button"
+      type="submit"
       appearance="beige-button"
+      [disabled]="loginForm.invalid"
     >
-      Large
+      Войти
     </button>
-  </div>
+  </form>
 </div>

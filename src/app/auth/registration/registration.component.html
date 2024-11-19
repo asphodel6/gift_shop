@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <div class="title">Зарегистрироваться</div>
+  <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" [tuiTextfieldCleaner]="true">
+    <label tuiLabel>
+      Фамилия
+      <tui-textfield>
+        <input
+          tuiTextfield
+          formControlName="secondName"
+        />
+      </tui-textfield>
+    </label>
+    <label tuiLabel>
+      Имя
+      <tui-textfield>
+        <input
+          tuiTextfield
+          formControlName="firstName"
+        />
+      </tui-textfield>
+    </label>
+    <label tuiLabel>
+      Почта
+      <tui-textfield>
+        <input
+          tuiTextfield
+          type="email"
+          formControlName="email"
+        />
+      </tui-textfield>
+    </label>
+    <label tuiLabel>
+      Дата рождения
+      <tui-input-date formControlName="dateOfBirth" tuiTextfieldSize="l" [tuiTextfieldLabelOutside]="true">
+      </tui-input-date>
+    </label>
+    <div>
+      <label tuiLabel>
+        Пароль
+        <tui-textfield>
+          <input
+            tuiTextfield
+            type="password"
+            formControlName="password"
+          />
+        </tui-textfield>
+      </label>
+      <label tuiLabel>
+        Повторите пароль
+        <tui-textfield>
+          <input
+            tuiTextfield
+            type="password"
+            formControlName="repeatPassword"
+          />
+        </tui-textfield>
+      </label>
+    </div>
+    <div>Уже есть аккаунт? <a class="link" routerLink="/login">Войти</a></div>
+    <button
+      size="l"
+      tuiButton
+      type="submit"
+      appearance="beige-button"
+      [disabled]="registrationForm.invalid"
+    >
+      Зарегестрироваться
+    </button>
+  </form>
+</div>
