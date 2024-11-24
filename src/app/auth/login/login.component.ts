@@ -9,6 +9,8 @@ import {
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TuiPassword} from '@taiga-ui/kit';
 import {RouterLink} from '@angular/router';
+import {AuthService} from '../service/auth.service';
+import {first, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -30,6 +32,7 @@ import {RouterLink} from '@angular/router';
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -37,6 +40,6 @@ export class LoginComponent {
   });
 
   onSubmit(): void {
-    console.log(this.loginForm.value);
+    this.authService.login(this.loginForm.value).pipe(first()).subscribe();
   }
 }

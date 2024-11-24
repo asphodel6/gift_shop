@@ -6,7 +6,7 @@
       <tui-textfield>
         <input
           tuiTextfield
-          formControlName="secondName"
+          formControlName="lastname"
         />
       </tui-textfield>
     </label>
@@ -15,7 +15,7 @@
       <tui-textfield>
         <input
           tuiTextfield
-          formControlName="firstName"
+          formControlName="firstname"
         />
       </tui-textfield>
     </label>
@@ -31,10 +31,9 @@
     </label>
     <label tuiLabel>
       Дата рождения
-      <tui-input-date formControlName="dateOfBirth" tuiTextfieldSize="l" [tuiTextfieldLabelOutside]="true">
+      <tui-input-date formControlName="birthday" tuiTextfieldSize="l" [tuiTextfieldLabelOutside]="true">
       </tui-input-date>
     </label>
-    <div>
       <label tuiLabel>
         Пароль
         <tui-textfield>
@@ -51,11 +50,13 @@
           <input
             tuiTextfield
             type="password"
-            formControlName="repeatPassword"
+            formControlName="confirmPassword"
           />
         </tui-textfield>
+        <tui-error [error]="[] | tuiFieldError | async"
+        [formGroup]="registrationForm">
+        </tui-error>
       </label>
-    </div>
     <div>Уже есть аккаунт? <a class="link" routerLink="/login">Войти</a></div>
     <button
       size="l"

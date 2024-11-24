@@ -1,17 +1,30 @@
 import {Component, inject} from '@angular/core';
 import {
-  TuiButton,
+  TuiButton, TuiError,
   TuiIcon,
   TuiLabel,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
 } from '@taiga-ui/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TuiPassword} from '@taiga-ui/kit';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
+import {TuiFieldErrorPipe, TuiPassword} from '@taiga-ui/kit';
 import {
   TuiInputDateModule, TuiTextfieldControllerModule
 } from '@taiga-ui/legacy';
 import {RouterLink} from '@angular/router';
+import {AuthService} from '../service/auth.service';
+import {TuiDay, TuiValidationError} from '@taiga-ui/cdk';
+import {AsyncPipe} from '@angular/common';
+import {IRegistration} from '../interfaces/auth.interfaces';
+import {first} from 'rxjs';
 
 @Component({
   selector: 'registration',
@@ -27,7 +40,10 @@ import {RouterLink} from '@angular/router';
     TuiInputDateModule,
     RouterLink,
     ReactiveFormsModule,
-    TuiTextfieldControllerModule
+    TuiTextfieldControllerModule,
+    TuiError,
+    TuiFieldErrorPipe,
+    AsyncPipe
   ],
   providers: [],
   templateUrl: './registration.component.html',
@@ -35,17 +51,37 @@ import {RouterLink} from '@angular/router';
 })
 export class RegistrationComponent {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
   registrationForm: FormGroup = this.fb.group({
-    secondName: ['', [Validators.required]],
-    firstName: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    firstname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    dateOfBirth: [null, [Validators.required]],
+    birthday: [null, [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(7)]],
-    repeatPassword: ['', [Validators.required, Validators.minLength(7)]],
+    confirmPassword: ['', [Validators.required]],
+  }, {
+    validators: [this.confirmPasswordValidator]
   });
 
   onSubmit(): void {
-    console.log(this.registrationForm.value);
+    const data: IRegistration = this.registrationForm.value;
+
+    data.birthday = (data.birthday as unknown as TuiDay).toString();
+
+    this.authService.registration(data).pipe(
+      first()
+    ).subscribe();
+  }
+
+  confirmPasswordValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      return new TuiValidationError('Пароли должны совпадать');
+    }
+
+    return null;
   }
 }
