@@ -14,22 +14,19 @@ import {first, takeUntil} from 'rxjs';
 import {AuthService} from '../service/auth.service';
 
 @Component({
-  selector: 'login',
-  standalone: true,
-  imports: [
-    TuiTextfieldComponent,
-    FormsModule,
-    TuiIcon,
-    TuiLabel,
-    TuiTextfieldDirective,
-    TuiPassword,
-    TuiButton,
-    RouterLink,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.less'
+    selector: 'login',
+    imports: [
+        TuiTextfieldComponent,
+        FormsModule,
+        TuiLabel,
+        TuiTextfieldDirective,
+        TuiButton,
+        RouterLink,
+        ReactiveFormsModule
+    ],
+    providers: [],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.less'
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);

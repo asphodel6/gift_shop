@@ -3,8 +3,36 @@
     LOGO
   </div>
   <div class="icons">
-    <tui-icon icon="@tui.search" class="icon"></tui-icon>
-    <tui-icon icon="@tui.shopping-cart" class="icon"></tui-icon>
-    <tui-icon icon="@tui.user" class="icon"></tui-icon>
+    @if (showIcons) {
+      <button tuiIconButton
+              iconStart="@tui.search"
+              size="m"
+              appearance="flat-destructive"
+              class="icon"></button>
+      <button tuiIconButton
+              iconStart="@tui.shopping-cart"
+              size="m"
+              appearance="flat-destructive"
+              class="icon"></button>
+      @if (isAuth | async) {
+        <button tuiIconButton
+                iconStart="@tui.user"
+                size="m"
+                appearance="flat-destructive"
+                class="icon"
+                (click)="logout()"
+        ></button>
+      } @else {
+        <button tuiIconButton
+                iconStart="@tui.log-in"
+                size="m"
+                appearance="flat-destructive"
+                class="icon"
+                routerLink="login"
+                tuiHint="Войти"
+                tuiHintAppearance="dark"
+        ></button>
+      }
+    }
   </div>
 </div>

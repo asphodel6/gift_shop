@@ -23,7 +23,7 @@ export class AuthService {
             first()
           ).subscribe()
 
-          // this.router.navigate(['registration']);
+          this.router.navigate(['main']);
         }
       ),
       catchError(() => {

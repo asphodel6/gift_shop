@@ -13,6 +13,8 @@ export class TokensService {
   setAccessToken(data: ILoginResponse): void {
     localStorage.setItem('access_token', data.access_token);
     localStorage.setItem('refresh_token', data.refresh_token);
+
+    this.isTokenValid();
   }
 
   isTokenValid(): boolean {
@@ -28,5 +30,7 @@ export class TokensService {
   clearTokens(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+
+    this.isTokenValid();
   }
 }

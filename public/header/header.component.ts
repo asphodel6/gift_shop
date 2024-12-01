@@ -1,20 +1,37 @@
-import {Component, inject} from '@angular/core';
-import {TuiIcon} from '@taiga-ui/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
+import {Component, inject, OnInit} from '@angular/core';
+import {TuiButton, TuiHint} from '@taiga-ui/core';
+import {RouterLink} from '@angular/router';
 import {TokensService} from '../../src/app/auth/service/tokens.service';
+import {AsyncPipe, CommonModule} from '@angular/common';
+import {AuthService} from '../../src/app/auth/service/auth.service';
 
 @Component({
-  selector: 'main-header',
-  standalone: true,
+  selector: 'app-header',
   imports: [
-    TuiIcon,
-    RouterLinkActive,
-    RouterLink
+    CommonModule,
+    RouterLink,
+    AsyncPipe,
+    TuiButton,
+    TuiHint
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.less'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private readonly tokensService = inject(TokensService);
+  private readonly authService = inject(AuthService);
   readonly isAuth = this.tokensService.isLoggedIn$;
+
+  logout(): void {
+    this.authService.logout();
+  }
+
+  ngOnInit(): void {
+    this.tokensService.isTokenValid();
+  }
+
+  get showIcons(): boolean {
+    return !(window.location.pathname === '/registration'
+      || window.location.pathname === '/login');
+  }
 }

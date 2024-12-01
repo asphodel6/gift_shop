@@ -28,27 +28,24 @@ import {first} from 'rxjs';
 import {AuthService} from '../service/auth.service';
 
 @Component({
-  selector: 'registration',
-  standalone: true,
-  imports: [
-    TuiTextfieldComponent,
-    FormsModule,
-    TuiIcon,
-    TuiLabel,
-    TuiTextfieldDirective,
-    TuiPassword,
-    TuiButton,
-    TuiInputDateModule,
-    RouterLink,
-    ReactiveFormsModule,
-    TuiTextfieldControllerModule,
-    TuiError,
-    TuiFieldErrorPipe,
-    AsyncPipe
-  ],
-  providers: [],
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.less'
+    selector: 'registration',
+    imports: [
+        TuiTextfieldComponent,
+        FormsModule,
+        TuiLabel,
+        TuiTextfieldDirective,
+        TuiButton,
+        TuiInputDateModule,
+        RouterLink,
+        ReactiveFormsModule,
+        TuiTextfieldControllerModule,
+        TuiError,
+        TuiFieldErrorPipe,
+        AsyncPipe
+    ],
+    providers: [],
+    templateUrl: './registration.component.html',
+    styleUrl: './registration.component.less'
 })
 export class RegistrationComponent {
   private fb = inject(FormBuilder);
