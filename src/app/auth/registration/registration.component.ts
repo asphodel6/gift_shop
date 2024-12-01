@@ -20,11 +20,12 @@ import {
   TuiInputDateModule, TuiTextfieldControllerModule
 } from '@taiga-ui/legacy';
 import {RouterLink} from '@angular/router';
-import {AuthService} from '../service/auth.service';
+import {AuthApiService} from '../service/auth-api.service';
 import {TuiDay, TuiValidationError} from '@taiga-ui/cdk';
 import {AsyncPipe} from '@angular/common';
 import {IRegistration} from '../interfaces/auth.interfaces';
 import {first} from 'rxjs';
+import {AuthService} from '../service/auth.service';
 
 @Component({
   selector: 'registration',
@@ -69,9 +70,7 @@ export class RegistrationComponent {
 
     data.birthday = (data.birthday as unknown as TuiDay).toString();
 
-    this.authService.registration(data).pipe(
-      first()
-    ).subscribe();
+    this.authService.registration(data);
   }
 
   confirmPasswordValidator(formGroup: FormGroup) {

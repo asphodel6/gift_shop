@@ -35,7 +35,7 @@
     "@taiga-ui/core": "^4.14.0",
     "@taiga-ui/event-plugins": "^4.3.1",
     "@taiga-ui/i18n": "^4.14.0",
-    "@taiga-ui/icons": "^4.14.0",
+    "@taiga-ui/icons": "^4.17.0",
     "@taiga-ui/kit": "^4.14.0",
     "@taiga-ui/legacy": "^4.15.0",
     "@taiga-ui/polymorpheus": "^4.7.4",

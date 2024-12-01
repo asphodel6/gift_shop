@@ -9,8 +9,9 @@ import {
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TuiPassword} from '@taiga-ui/kit';
 import {RouterLink} from '@angular/router';
-import {AuthService} from '../service/auth.service';
+import {AuthApiService} from '../service/auth-api.service';
 import {first, takeUntil} from 'rxjs';
+import {AuthService} from '../service/auth.service';
 
 @Component({
   selector: 'login',
@@ -40,6 +41,6 @@ export class LoginComponent {
   });
 
   onSubmit(): void {
-    this.authService.login(this.loginForm.value).pipe(first()).subscribe();
+    this.authService.login(this.loginForm.value);
   }
 }
