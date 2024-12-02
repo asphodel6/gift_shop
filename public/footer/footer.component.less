@@ -1,6 +1,7 @@
 @import "src/styles";
 
 .footer-wrapper {
+  display: flex;
   background-color: @light-beige-color;
   padding: 50px 0;
   position:fixed;
@@ -11,9 +12,11 @@
 
 .footer {
   display: flex;
-  gap: 77px;
+  margin-left: 100px;
+  flex-direction: column;
   font-size: 20px;
   font-weight: 700;
+  gap: 30px;
   justify-content: space-around;
 
   span:hover {
@@ -23,11 +26,20 @@
 
 .logo {
   font-size: 24px;
+  margin-left: 100px;
+
+  &:hover {
+    color: @beige-color;
+  }
+}
+
+.footer-items {
+  display: flex;
+  gap: 77px;
 }
 
 .additional-info {
   display: flex;
-  margin-top: 30px;
   justify-content: space-between;
 }
 
@@ -36,7 +48,6 @@
   gap: 72px;
   font-size: 18px;
   font-weight: 500;
-  margin-right: 157px;
 }
 
 .icons {
@@ -48,4 +59,8 @@
   width: 36px;
   height: 36px;
   color: @dark-beige;
+
+  &:hover {
+    color: @brown-color
+  }
 }

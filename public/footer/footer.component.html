@@ -1,19 +1,21 @@
 <div class="footer-wrapper">
+  <div class="logo">LOGO</div>
   <div class="footer">
-    <div class="logo">LOGO</div>
-    @for (item of items; track items) {
-      <span>{{ item }}</span>
-    }
-  </div>
-  <div class="additional-info">
-    <div class="icons">
-      <tui-icon icon="telegram" class="icon"></tui-icon>
-      <tui-icon icon="tik-tok" class="icon"></tui-icon>
-      <tui-icon icon="youtube" class="icon"></tui-icon>
+    <div class="footer-items">
+      @for (item of items; track items) {
+        <span>{{ item }}</span>
+      }
     </div>
-    <div class="contacts">
-      <div>{{ phone }}</div>
-      <div>{{ email }}</div>
+    <div class="additional-info">
+      <div class="icons">
+        <tui-icon icon="telegram" class="icon"></tui-icon>
+        <tui-icon icon="tik-tok" class="icon"></tui-icon>
+        <tui-icon icon="youtube" class="icon"></tui-icon>
+      </div>
+      <div class="contacts">
+        <div>{{ phone }}</div>
+        <div>{{ email }}</div>
+      </div>
     </div>
   </div>
 </div>
