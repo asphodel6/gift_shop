@@ -1,16 +1,12 @@
 import {Component, inject} from '@angular/core';
 import {
   TuiButton,
-  TuiIcon,
   TuiLabel,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
 } from '@taiga-ui/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TuiPassword} from '@taiga-ui/kit';
 import {RouterLink} from '@angular/router';
-import {AuthApiService} from '../service/auth-api.service';
-import {first, takeUntil} from 'rxjs';
 import {AuthService} from '../service/auth.service';
 
 @Component({

@@ -1,2 +1,40 @@
 <main-bar></main-bar>
-<app-footer></app-footer>
+<div class="wrapper">
+  <div class="filters-wrapper">
+    <div class="filters-title">Выбор категорий</div>
+    <div class="filters">
+      @for (filter of filters; track filter) {
+        <filter [title]="filter.title" [items]="filter.items"></filter>
+      }
+    </div>
+    <div class="filters budget">
+      <div class="budget-title">Какой бюджет?</div>
+      <tui-input-range
+        [formControl]="budgetControl"
+        [max]="maxBudget"
+        [min]="minBudget"
+        [steps]="steps"
+        [tuiTextfieldLabelOutside]="true"
+        [tuiTextfieldSize]="'m'"
+      ></tui-input-range>
+    </div>
+    <div class="buttons">
+      <button tuiButton
+              size="m"
+              appearance="beige-button"
+      >
+        Применить
+      </button>
+      <button tuiButton
+              size="m"
+              appearance="white-button"
+              (click)="clearFilters()"
+      >
+        Сбросить
+      </button>
+    </div>
+  </div>
+  <div>
+  aaaa
+  </div>
+</div>

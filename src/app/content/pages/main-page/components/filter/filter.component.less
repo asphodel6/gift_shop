@@ -1,0 +1,54 @@
+@import "../../../../../../styles";
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+:host {
+  display: block;
+  width: 255px;
+  height: 221px;
+  color: @brown-color;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+input {
+  border: 1px solid @beige-color !important;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.filter {
+  display: flex;
+  padding: 10px 0;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.scroll {
+  block-size: 176px;
+
+  ::ng-deep {
+    .t-bar {
+      color: @pink-color;
+    }
+  }
+}
+
+.checkbox {
+  border: 2px solid @pink-color !important;
+
+  &:checked {
+    background-color: @pink-color;
+  }
+}
+
+

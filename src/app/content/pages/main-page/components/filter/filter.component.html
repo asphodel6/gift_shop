@@ -1,0 +1,29 @@
+<div>
+  <div class="title">{{ title() }}</div>
+  <div>
+    <tui-textfield iconStart="@tui.search" tuiTextfieldSize="s">
+      <input
+        placeholder="Введите запрос..."
+        tuiTextfield
+        [ngModel]="searchFilterValue$ | async"
+        (ngModelChange)="updateSearchFilterValue($event)"
+      />
+    </tui-textfield>
+  </div>
+  <form [formGroup]="form" class="filters">
+    <tui-scrollbar class="scroll">
+    @for (item of items$ | async; track item; let index = $index) {
+        <label class="filter">
+          <input
+            size="m"
+            class="checkbox"
+            tuiCheckbox
+            type="checkbox"
+            [formControlName]="index"
+          />
+          {{ item }}
+        </label>
+    }
+    </tui-scrollbar>
+  </form>
+</div>
