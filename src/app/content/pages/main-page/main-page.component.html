@@ -34,7 +34,14 @@
       </button>
     </div>
   </div>
-  <div>
-  aaaa
+  <div class="gifts-wrapper">
+    @for (gift of gifts; track gift) {
+      <gift-card
+        [price]="gift.price"
+        [giftTitle]="gift.title"
+        [rating]="gift.rating"
+        [ratingCount]="gift.ratingCount"
+      ></gift-card>
+    }
   </div>
 </div>

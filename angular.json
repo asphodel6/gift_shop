@@ -34,6 +34,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "public/assets/images",
+                "output": "/"
               }
             ],
             "styles": [
@@ -41,7 +46,12 @@
               "@taiga-ui/core/styles/taiga-ui-theme.less",
               "@taiga-ui/core/styles/taiga-ui-fonts.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src"
+              ]
+            }
           },
           "configurations": {
             "production": {

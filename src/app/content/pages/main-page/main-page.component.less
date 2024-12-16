@@ -48,6 +48,14 @@
 
 tui-input-range {
   border: 1px solid @beige-color !important;
+
+  ::ng-deep {
+    t-wrapper {
+      background-color: red;
+      color: red;
+      outline-color: red;
+    }
+  }
 }
 
 .buttons {
@@ -90,4 +98,11 @@ tui-input-range {
     color: @white-color;
     background: @brown-color;
   });
+}
+
+.gifts-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px
 }

@@ -1,0 +1,13 @@
+<div tuiCardLarge tuiAppearance="floating" class="gift-wrapper">
+  <div><img [ngSrc]="image()" height="267" width="308"></div>
+  <div class="gift-info">
+    <div class="price">{{ price()}} {{'RUB' | tuiCurrency}}</div>
+    <div class="title">{{ giftTitle() }}</div>
+    <div class="rating-info">
+      <img src="star.png" width="15px" height="14px">
+      <span class="rating">{{ rating() }}</span>
+      <span class="rating-count">({{ratingCount()}} {{ratingDescription()}})</span>
+    </div>
+  </div>
+  <button tuiButton appearance="beige-button">Добавить в корзину</button>
+</div>

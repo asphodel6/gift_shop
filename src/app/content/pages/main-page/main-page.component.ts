@@ -3,7 +3,15 @@ import {BarComponent} from './components/bar/bar.component';
 import {FilterComponent} from './components/filter/filter.component';
 import {TuiInputRangeModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {TuiButton} from '@taiga-ui/core';
+import {TuiAppearance, TuiButton} from '@taiga-ui/core';
+import {GiftCardComponent} from './components/gift-card/gift-card.component';
+
+const mockGift = {
+  price: 499,
+  title: 'Свечка в форме котика',
+  rating: 4.9,
+  ratingCount: 11
+};
 
 @Component({
     selector: 'main-page',
@@ -14,6 +22,7 @@ import {TuiButton} from '@taiga-ui/core';
     ReactiveFormsModule,
     TuiTextfieldControllerModule,
     TuiButton,
+    GiftCardComponent,
   ],
     templateUrl: './main-page.component.html',
     styleUrl: './main-page.component.less'
@@ -49,7 +58,12 @@ export class MainPageComponent implements OnInit{
         'Для творчества',
       ]
     },
-  ]
+  ];
+
+  readonly gifts =
+    Array(10)
+      .fill(0)
+      .map(() => ({...mockGift}));
 
   protected readonly minBudget= 0;
   protected readonly maxBudget= 100000;

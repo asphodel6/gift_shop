@@ -1,0 +1,70 @@
+@import "styles";
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+.gift-wrapper {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: var(--tui-shadow-small-hover);
+  }
+}
+
+[tuiAppearance][data-appearance='beige-button'] {
+  color: @brown-color;
+  background: @beige-color;
+
+  .appearance-hover({
+    color: @brown-color;
+    background:@light-beige-color;
+  });
+
+  .appearance-active({
+    color: @white-color;
+    background: @brown-color;
+  });
+}
+
+.gift-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .padding
+}
+
+.padding {
+  padding: 0 16px;
+}
+
+.price {
+  color: @scarlet-color;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.title {
+  color: @brown-color;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.rating {
+  color: @dark-beige;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.rating-info {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+
+.rating-count {
+  color: @dark-beige;
+  font-size: 16px;
+  font-weight: 600;
+}
