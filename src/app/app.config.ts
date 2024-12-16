@@ -1,5 +1,5 @@
 import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {provideRouter, withComponentInputBinding} from '@angular/router';
 import {NG_EVENT_PLUGINS} from '@taiga-ui/event-plugins';
 
 import { routes } from './app.routes';
@@ -10,7 +10,7 @@ import {URL_TOKEN} from './auth/tokens/url.token';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), NG_EVENT_PLUGINS,
+    provideRouter(routes, withComponentInputBinding()), NG_EVENT_PLUGINS,
     provideAnimations(),
     importProvidersFrom(
       JwtModule.forRoot({

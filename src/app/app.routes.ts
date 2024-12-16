@@ -3,6 +3,7 @@ import {LoginComponent} from './auth/login/login.component';
 import {RegistrationComponent} from './auth/registration/registration.component';
 import {MainPageComponent} from './content/pages/main-page/main-page.component';
 import {MainComponent} from './content/main.component';
+import {GiftPageComponent} from './content/pages/gift-page/gift-page.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: "full"},
@@ -10,7 +11,8 @@ export const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'main', component: MainComponent,
     children: [
-      {path: '', component: MainPageComponent}
+      {path: '', component: MainPageComponent},
+      {path: 'gift/:id', component: GiftPageComponent}
     ]
   }
 ];

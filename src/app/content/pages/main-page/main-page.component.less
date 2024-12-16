@@ -18,7 +18,6 @@
   display: flex;
   flex-direction: row;
   gap: 93px;
-  margin-top: 114px;
 }
 
 .filters-wrapper {
@@ -26,6 +25,7 @@
   flex-direction: column;
   gap: 20px;
   margin-left: 80px;
+  margin-top: 114px;
 }
 
 .filters-title {
@@ -48,14 +48,6 @@
 
 tui-input-range {
   border: 1px solid @beige-color !important;
-
-  ::ng-deep {
-    t-wrapper {
-      background-color: red;
-      color: red;
-      outline-color: red;
-    }
-  }
 }
 
 .buttons {
@@ -105,4 +97,12 @@ tui-input-range {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 30px
+}
+
+.gifts-title {
+  margin-top: 80px;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 800;
+  color: @brown-color;
 }

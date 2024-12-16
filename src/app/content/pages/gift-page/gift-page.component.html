@@ -1,0 +1,27 @@
+<div>
+  <div class="gift">
+    <div>
+      <img src="gift.png" width="405px" height="405px">
+    </div>
+    <div>
+      <div class="title">{{ mockGift.title }}</div>
+      <div class="card-info">
+        <div class="title-font">{{ mockGift.price }} {{ 'RUB' | tuiCurrency }}</div>
+        <div class="rating-info">
+          <img src="star.png" width="25px" height="24px">
+          <span class="rating">{{ mockGift.rating }}</span>
+          <span class="rating-count">({{ mockGift.ratingCount }} {{ ratingDescription }})</span>
+        </div>
+      </div>
+      <div class="gift-info">
+        @for (item of mockGift.info; track item) {
+          <div class="category-info">
+            <div class="category">{{ item.label }}</div>
+            <div class="category-value">{{ item.value }}</div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>
