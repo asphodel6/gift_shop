@@ -1,9 +1,16 @@
 @import "styles";
 @import '@taiga-ui/core/styles/taiga-ui-local.less';
 
+:host {
+  --tui-background-accent-1: @pink-color;
+  margin-bottom: 100px;
+}
+
 .gift {
   display: flex;
   flex-direction: row;
+  //justify-content: center;
+  margin-left: 20vw;
   gap: 60px;
 }
 
@@ -69,4 +76,69 @@
   display: flex;
   flex-direction: row;
   gap: 60px;
+}
+
+[tuiAppearance][data-appearance='beige-button'] {
+  color: @brown-color;
+  background: @beige-color;
+
+  .appearance-hover({
+    color: @brown-color;
+    background:@light-beige-color;
+  });
+
+  .appearance-active({
+    color: @white-color;
+    background: @brown-color;
+  });
+}
+
+[tuiAppearance][data-appearance='pink-button'] {
+  color: @scarlet-color;
+  background: @pink-color;
+
+  .appearance-hover({
+    color: @scarlet-color;
+    background: @light-beige-color;
+  });
+
+  .appearance-active({
+    color: @pink-color;
+    background: @scarlet-color;
+  });
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.tab {
+  font-size: 24px;
+  font-weight: 700;
+  color: @dark-beige;
+  &._active {
+    color: @brown-color;
+  }
+}
+
+tui-tabs {
+  box-shadow: none;
+  margin-left: 20vw;
+}
+
+.right-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 18px;
+  color: @brown-color;
+  margin-top: 40px;
+  width: 60%;
+  align-self: center;
 }

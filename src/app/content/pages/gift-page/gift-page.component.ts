@@ -1,10 +1,15 @@
 import {Component, computed, input} from '@angular/core';
 import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
+import {TuiButton} from '@taiga-ui/core';
+import {TuiTabs} from '@taiga-ui/kit';
+import {MOCK_GIFT} from '../../../../../public';
 
 @Component({
   selector: 'gift-page',
   imports: [
-    TuiCurrencyPipe
+    TuiCurrencyPipe,
+    TuiButton,
+    TuiTabs
   ],
   templateUrl: './gift-page.component.html',
   styleUrl: './gift-page.component.less'
@@ -12,20 +17,9 @@ import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
 export class GiftPageComponent {
   readonly id = input.required();
 
-  readonly mockGift = {
-    price: 499,
-    title: 'Свечка в форме котика',
-    rating: 4.9,
-    ratingCount: 11,
-    info: [
-      {label: 'Название бренда', value: 'Нет'},
-      {label: 'Происхождение', value: 'Китай'},
-      {label: 'Материал', value: 'Смола'},
-      {label: 'Стиль', value: 'Современный'},
-      {label: 'Размер', value: '6 х 6 см'},
-      {label: 'Количество', value: '1'}
-    ]
-  };
+  readonly mockGift = MOCK_GIFT;
+
+  activeItemIndex = 0;
 
   get ratingDescription(): string{
     if (this.mockGift.ratingCount > 10 && this.mockGift.ratingCount < 20 ) {

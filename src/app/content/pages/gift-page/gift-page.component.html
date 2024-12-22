@@ -21,7 +21,31 @@
           </div>
         }
       </div>
+      <div class="buttons">
+        <button tuiButton appearance="beige-button">Добавить в корзину</button>
+        <button tuiButton appearance="pink-button">Купить сейчас</button>
+      </div>
     </div>
   </div>
-  <div></div>
+  <div class="right-block">
+    <tui-tabs size="l" [activeItemIndex]="activeItemIndex">
+      <button tuiTab class="tab" (click)="activeItemIndex = 0">
+        Описание
+      </button>
+      <button tuiTab class="tab" (click)="activeItemIndex = 1">
+        Отзывы
+      </button>
+    </tui-tabs>
+    <div class="description">
+      @switch (activeItemIndex) {
+        @case (1) {
+          Ничего нет
+        }
+
+        @default {
+          {{mockGift.description}}
+        }
+      }
+    </div>
+  </div>
 </div>
