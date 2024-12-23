@@ -1,8 +1,10 @@
-import {Component, computed, input} from '@angular/core';
+import {Component, computed, inject, input} from '@angular/core';
 import {TuiCardLarge} from '@taiga-ui/layout';
-import {TuiAppearance, TuiButton, TuiIcon} from '@taiga-ui/core';
-import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
+import {TuiAppearance, TuiButton} from '@taiga-ui/core';
+import {NgOptimizedImage} from '@angular/common';
 import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
+import {StorageService} from '../../../../../../../public';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'gift-card',
@@ -12,10 +14,13 @@ import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
 })
 export class GiftCardComponent {
   readonly image = input<string>('gift.png');
+  readonly id = input.required<string>();
   readonly price = input.required<number>();
   readonly giftTitle = input.required<string>();
   readonly rating = input.required<number>();
   readonly ratingCount = input.required<number>();
+  private readonly storageService = inject(StorageService);
+  private readonly router = inject(Router);
 
   readonly ratingDescription = computed(() => {
     if (this.ratingCount() > 10 && this.ratingCount() < 20 ) {
@@ -32,4 +37,13 @@ export class GiftCardComponent {
       default: return 'оценок'
     }
   })
+
+  protected addToCart(event: Event): void {
+    this.storageService.addGiftToCart(this.id());
+    event.stopPropagation();
+  }
+
+  protected navigateToGift(): void {
+    this.router.navigate(['main/gift', this.id()]);
+  }
 }

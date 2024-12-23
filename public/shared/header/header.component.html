@@ -15,7 +15,9 @@
               appearance="flat-destructive"
               tuiHint="Корзина"
               tuiHintAppearance="dark"
-              class="icon"></button>
+              class="icon"
+              (click)="goToCart()"
+      ></button>
       @if (isAuth | async) {
         <button tuiIconButton
                 iconStart="@tui.user"
@@ -38,3 +40,4 @@
     }
   </div>
 </div>
+<main-bar></main-bar>

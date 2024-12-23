@@ -1,0 +1,83 @@
+@import "src/styles";
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+:host {
+  color: @brown-color;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.wrapper {
+  margin-left: 20vw;
+}
+
+.selected-all {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  align-items: center;
+  gap: 10px;
+
+  .count {
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
+
+.checkbox {
+  border: 2px solid @pink-color !important;
+
+  &:checked {
+    background-color: @pink-color;
+  }
+}
+
+.content {
+  margin-top: 38px;
+}
+
+[tuiAppearance][data-appearance='beige-button'] {
+  color: @brown-color;
+  background: @beige-color;
+
+  .appearance-hover({
+    color: @brown-color;
+    background:@light-beige-color;
+  });
+
+  .appearance-active({
+    color: @white-color;
+    background: @brown-color;
+  });
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .description {
+    font-size: 32px;
+    font-weight: 800;
+    color: @scarlet-color;
+  }
+
+  .article {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .navigate {
+    margin-top: 40px;
+  }
+}
+
+.recommended {
+  display: flex;
+  justify-content: center;
+  margin-top: 140px;
+}

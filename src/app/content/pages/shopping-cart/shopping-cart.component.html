@@ -1,0 +1,44 @@
+@if (count$ | async) {
+  <div class="wrapper">
+    <div class="title">Корзина</div>
+    <div class="selected-all">
+      <input
+        tuiCheckbox
+        type="checkbox"
+        class="checkbox"
+        [(ngModel)]="selectedAll"
+      />
+      <div class='count'>Выбрать все ({{ count$ | async }})</div>
+      <button tuiIconButton
+              iconStart="@tui.trash"
+              appearance="icon"
+              size="s"
+              (click)="clearCart()"></button>
+    </div>
+    <div class="content">
+      <div>
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="empty">
+    <div class="description">Ваша корзина пока пуста :(</div>
+    <div class="article">...но у нас много подарков, которые ждут, чтобы стать вашими!</div>
+    <div class="navigate">
+      <button tuiButton
+              size="l"
+              appearance="beige-button"
+              (click)="toMain()"
+      >
+        Перейти на главную страницу
+      </button>
+    </div>
+  </div>
+}
+<div class="recommended">
+  <recommended></recommended>
+</div>

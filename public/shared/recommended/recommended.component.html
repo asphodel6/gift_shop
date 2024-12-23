@@ -1,0 +1,43 @@
+<div>
+  <div class="title">Рекомендуемые вам</div>
+  <div
+    tuiCarouselButtons
+    class="wrapper"
+  >
+    <button
+      iconStart="@tui.chevron-left"
+      tuiIconButton
+      appearance="icon"
+      (click)="carousel.prev()"
+    >
+    </button>
+    <tui-carousel
+      #carousel
+      [itemsCount]="4"
+      class="carousel"
+    >
+      @for (gift of gifts; track gift) {
+        <div
+          *tuiItem
+          class="item"
+        >
+          <gift-card
+            [id]="gift.id"
+            [price]="gift.price"
+            [ratingCount]="gift.ratingCount"
+            [giftTitle]="gift.title"
+            [rating]="gift.rating"
+          ></gift-card>
+        </div>
+      }
+    </tui-carousel>
+    <button
+      iconStart="@tui.chevron-right"
+      tuiIconButton
+      appearance="icon"
+      (click)="carousel.next()"
+    >
+      Next
+    </button>
+  </div>
+</div>

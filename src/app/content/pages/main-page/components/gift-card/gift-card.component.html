@@ -1,4 +1,4 @@
-<div tuiCardLarge tuiAppearance="floating" class="gift-wrapper">
+<div tuiCardLarge tuiAppearance="floating" class="gift-wrapper" (click)="navigateToGift()">
   <div><img [ngSrc]="image()" height="267" width="308"></div>
   <div class="gift-info">
     <div class="price">{{ price()}} {{'RUB' | tuiCurrency}}</div>
@@ -9,5 +9,5 @@
       <span class="rating-count">({{ratingCount()}} {{ratingDescription()}})</span>
     </div>
   </div>
-  <button tuiButton appearance="beige-button">Добавить в корзину</button>
+  <button tuiButton appearance="beige-button" (click)="addToCart($event)">Добавить в корзину</button>
 </div>

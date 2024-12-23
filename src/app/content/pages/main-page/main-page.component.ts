@@ -1,24 +1,14 @@
-import {Component, inject, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {BarComponent} from './components/bar/bar.component';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FilterComponent} from './components/filter/filter.component';
 import {TuiInputRangeModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {TuiAppearance, TuiButton} from '@taiga-ui/core';
 import {GiftCardComponent} from './components/gift-card/gift-card.component';
-import {Router} from '@angular/router';
-
-const mockGift = {
-  id: '1',
-  price: 499,
-  title: 'Свечка в форме котика',
-  rating: 4.9,
-  ratingCount: 11
-};
+import {MOCK_GIFT_MAIN} from '../../../../../public';
 
 @Component({
     selector: 'main-page',
   imports: [
-    BarComponent,
     FilterComponent,
     TuiInputRangeModule,
     ReactiveFormsModule,
@@ -65,14 +55,21 @@ export class MainPageComponent implements OnInit{
   readonly gifts =
     Array(10)
       .fill(0)
-      .map(() => ({...mockGift}));
+      .map((_, index) => {
+        const gift = {
+          ...MOCK_GIFT_MAIN
+        };
+
+        gift.id = String(index);
+
+        return gift;
+      });
 
   protected readonly minBudget= 0;
   protected readonly maxBudget= 100000;
   protected readonly sliderStep = 1000;
   protected readonly steps = (this.maxBudget - this.minBudget) / this.sliderStep;
   budgetControl!: FormControl;
-  private readonly router = inject(Router);
 
   @ViewChildren(FilterComponent) filterComponents!: QueryList<FilterComponent>;
 
@@ -91,9 +88,5 @@ export class MainPageComponent implements OnInit{
      component.initForm();
      component.updateSearchFilterValue('');
    }
-  }
-
-  navigateToGift(id: string): void {
-    this.router.navigate(['main/gift', id]);
   }
 }

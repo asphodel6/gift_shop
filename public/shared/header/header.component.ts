@@ -1,9 +1,10 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {TuiButton, TuiHint} from '@taiga-ui/core';
-import {RouterLink} from '@angular/router';
-import {TokensService} from '../../src/app/auth/service/tokens.service';
+import {Router, RouterLink} from '@angular/router';
+import {TokensService} from '../../../src/app/auth/service/tokens.service';
 import {AsyncPipe, CommonModule} from '@angular/common';
-import {AuthService} from '../../src/app/auth/service/auth.service';
+import {AuthService} from '../../../src/app/auth/service/auth.service';
+import {BarComponent} from './component/bar/bar.component';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ import {AuthService} from '../../src/app/auth/service/auth.service';
     RouterLink,
     AsyncPipe,
     TuiButton,
-    TuiHint
+    TuiHint,
+    BarComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.less'
@@ -20,6 +22,7 @@ import {AuthService} from '../../src/app/auth/service/auth.service';
 export class HeaderComponent implements OnInit {
   private readonly tokensService = inject(TokensService);
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   readonly isAuth = this.tokensService.isLoggedIn$;
 
   logout(): void {
@@ -33,5 +36,9 @@ export class HeaderComponent implements OnInit {
   get showIcons(): boolean {
     return !(window.location.pathname === '/registration'
       || window.location.pathname === '/login');
+  }
+
+  goToCart(): void {
+    this.router.navigate(['main/shopping-cart']);
   }
 }

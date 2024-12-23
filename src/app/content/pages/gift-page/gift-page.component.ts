@@ -1,15 +1,18 @@
-import {Component, computed, input} from '@angular/core';
+import {Component, computed, inject, input} from '@angular/core';
 import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
 import {TuiButton} from '@taiga-ui/core';
 import {TuiTabs} from '@taiga-ui/kit';
-import {MOCK_GIFT} from '../../../../../public';
+import {MOCK_GIFT, StorageService} from '../../../../../public';
+import {RecommendedComponent} from '../../../../../public/shared/recommended/recommended.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'gift-page',
   imports: [
     TuiCurrencyPipe,
     TuiButton,
-    TuiTabs
+    TuiTabs,
+    RecommendedComponent
   ],
   templateUrl: './gift-page.component.html',
   styleUrl: './gift-page.component.less'
@@ -18,6 +21,8 @@ export class GiftPageComponent {
   readonly id = input.required();
 
   readonly mockGift = MOCK_GIFT;
+
+  private readonly storageService = inject(StorageService);
 
   activeItemIndex = 0;
 
@@ -35,5 +40,9 @@ export class GiftPageComponent {
       case 4: return 'оценки';
       default: return 'оценок'
     }
+  }
+
+  protected addToCart(id: string): void {
+    this.storageService.addGiftToCart(id);
   }
 }
