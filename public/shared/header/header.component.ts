@@ -5,6 +5,8 @@ import {TokensService} from '../../../src/app/auth/service/tokens.service';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {AuthService} from '../../../src/app/auth/service/auth.service';
 import {BarComponent} from './component/bar/bar.component';
+import {StorageService} from '../storage-service/storage.service';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +25,10 @@ export class HeaderComponent implements OnInit {
   private readonly tokensService = inject(TokensService);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly storageService = inject(StorageService);
   readonly isAuth = this.tokensService.isLoggedIn$;
+
+  readonly cartCount = toSignal(this.storageService.cartCount$);
 
   logout(): void {
     this.authService.logout();

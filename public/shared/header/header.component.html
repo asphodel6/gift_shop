@@ -9,15 +9,21 @@
               size="m"
               appearance="flat-destructive"
               class="icon"></button>
-      <button tuiIconButton
-              iconStart="@tui.shopping-cart"
-              size="m"
-              appearance="flat-destructive"
-              tuiHint="Корзина"
-              tuiHintAppearance="dark"
-              class="icon"
-              (click)="goToCart()"
-      ></button>
+      <div class="cart-wrapper">
+        <button tuiIconButton
+                iconStart="@tui.shopping-cart"
+                size="m"
+                appearance="flat-destructive"
+                tuiHint="Корзина"
+                tuiHintAppearance="dark"
+                class="icon"
+                (click)="goToCart()"
+        >
+        </button>
+        @if (cartCount()) {
+          <div class="cart-count">{{cartCount()}}</div>
+        }
+      </div>
       @if (isAuth | async) {
         <button tuiIconButton
                 iconStart="@tui.user"
