@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, first} from 'rxjs';
 import {TuiAlertService} from '@taiga-ui/core';
 
-interface ICartItem {
+interface IStorageItem {
   id: string;
   count: number;
 }
@@ -12,10 +12,11 @@ interface ICartItem {
 })
 export class StorageService {
   readonly cartCount$ = new BehaviorSubject<number>(this.getGifts().length);
+  readonly cartItems$ = new BehaviorSubject<IStorageItem[]>(this.getGifts());
   private readonly alerts = inject(TuiAlertService);
 
   addGiftToCart(id: string): void {
-    let gifts: ICartItem[] = this.getGifts();
+    let gifts: IStorageItem[] = this.getGifts();
 
     if (gifts.length > 0) {
       const index = gifts.findIndex(gift => gift.id === id)
@@ -49,19 +50,34 @@ export class StorageService {
     ).subscribe()
   }
 
-  private setGifts(gifts: ICartItem[]): void {
+  private setGifts(gifts: IStorageItem[]): void {
     localStorage.setItem('gifts', JSON.stringify(gifts));
 
     this.cartCount$.next(gifts.length);
+    this.cartItems$.next(gifts);
   }
 
-  private getGifts(): ICartItem[] {
+  private getGifts(): IStorageItem[] {
     const gifts = localStorage.getItem('gifts');
 
     if (gifts) {
-      return JSON.parse(gifts) as ICartItem[];
+      return JSON.parse(gifts) as IStorageItem[];
     }
 
     return [];
+  }
+
+  updateCount(id: string, count: number): void {
+    let gifts: IStorageItem[] = this.getGifts();
+
+    const index = gifts.findIndex(gift => gift.id === id);
+
+    if (index >= 0) {
+      if (count > 0) {
+        gifts[index].count = count;
+      }
+
+      this.setGifts(gifts)
+    }
   }
 }

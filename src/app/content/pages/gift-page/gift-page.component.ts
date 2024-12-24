@@ -18,7 +18,7 @@ import {Router} from '@angular/router';
   styleUrl: './gift-page.component.less'
 })
 export class GiftPageComponent {
-  readonly id = input.required();
+  readonly id = input.required<string>();
 
   readonly mockGift = MOCK_GIFT;
 

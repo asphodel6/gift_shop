@@ -4,7 +4,6 @@ import {TuiCheckbox} from '@taiga-ui/kit';
 import {TuiScrollbar, TuiTextfieldComponent, TuiTextfieldDirective, TuiTextfieldOptionsDirective} from '@taiga-ui/core';
 import {BehaviorSubject, distinctUntilChanged, map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
-import {values} from 'lodash-es';
 
 @Component({
   selector: 'filter',
@@ -53,7 +52,7 @@ export class FilterComponent implements OnInit {
   filterCollection(items: string[], value: string): string[] {
     const re = new RegExp(value, 'i');
 
-    return values(items).filter(item => re.test(item));
+    return items.filter(item => re.test(item));
   }
 
   initForm(): void {

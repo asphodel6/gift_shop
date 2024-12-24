@@ -16,11 +16,31 @@
               (click)="clearCart()"></button>
     </div>
     <div class="content">
-      <div>
-
+      <div class="list">
+        @for (item of cartItems(); track item.id) {
+          <cart-item
+            [item]="item"
+          ></cart-item>
+        }
       </div>
       <div>
-
+        <div class="order-title">Оформление заказа</div>
+        <div class="order-labels">
+          @for (label of orderLabels; track label) {
+            <div class="category-info">
+              <div class="category">{{ label }}</div>
+              <div class="category-value">_</div>
+            </div>
+          }
+        </div>
+        <div class="price">
+          <div>
+            ИТОГО
+          </div>
+          <div>
+            {{ finalPrice() }}
+          </div>
+        </div>
       </div>
     </div>
   </div>

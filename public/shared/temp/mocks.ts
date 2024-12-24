@@ -1,3 +1,5 @@
+import {ICartItem} from '../../../src/app/content/pages/shopping-cart/models/cart-item.interface';
+
 export const MOCK_GIFT = {
   id: '1',
   price: 499,
@@ -26,3 +28,11 @@ export const MOCK_GIFT_MAIN = {
   rating: 4.9,
   ratingCount: 11
 };
+
+export const MOCK_CART_ITEM: ICartItem = {
+  id: '0',
+  count: 1,
+  price: 499,
+  deliveryDate: '27 ноября',
+  title: 'Свечка в форме котика'
+}

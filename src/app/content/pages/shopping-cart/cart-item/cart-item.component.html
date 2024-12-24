@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <div class="left-block">
+    <div>
+      <img src="gift.png" width="115px" height="115px">
+    </div>
+    <div>
+      <div class="title">
+        {{ item().title }}
+      </div>
+      <div class="delivery">
+        Доставим {{ item().deliveryDate }}
+      </div>
+    </div>
+  </div>
+  <div class="right-block">
+    <div class="count">
+      <tui-input-number
+        [tuiTextfieldLabelOutside]="true"
+        [min]="1"
+        [ngModel]="item().count"
+        (ngModelChange)="updateCount($event)"
+      ></tui-input-number>
+    </div>
+    <div class="title-font">
+      {{ finalPrice() }} {{'RUB' | tuiCurrency}}
+    </div>
+  </div>
+</div>
