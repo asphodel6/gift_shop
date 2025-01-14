@@ -9,9 +9,7 @@ import {RecommendedComponent} from '../../../../../public/shared/recommended/rec
 import {CartItemComponent} from './cart-item/cart-item.component';
 import {ICartItem} from './models/cart-item.interface';
 import {Subject, switchMap, takeUntil, withLatestFrom} from 'rxjs';
-import {MOCK_CART_ITEM, MOCK_GIFT} from '../../../../../public';
 import {GiftsService} from '../../../services/gifts.service';
-import {IGift} from '../../../../../public/shared/models/gift.interface';
 
 @Component({
   selector: 'shopping-cart',
@@ -36,7 +34,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   readonly count$ = this.cartService.count$;
   readonly storageItems$ = this.cartService.cartItems$;
-  readonly cartItems = signal<IGift[]>([]);
+  readonly cartItems = signal<ICartItem[]>([]);
 
   readonly orderLabels = ['Количество товаров',
     'Стоимость доставки',
@@ -56,22 +54,31 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storageItems$.pipe(takeUntil(this.destroy$),
-      switchMap(items =>
-        this.giftsService.getGiftsByIds(items.map(item => item.id)).pipe(
-          withLatestFrom(this.storageItems$)
-        )
+      switchMap(items => {
+        console.log(items);
+         return  this.giftsService.getGiftsByIds(items.map(item => item.id)).pipe(
+            withLatestFrom(this.storageItems$)
+          )
+        }
       )
       )
       .subscribe(([items, storageItems]) => {
-        const gifts: IGift[] = [];
+        const gifts: ICartItem[] = [];
         let price = 0;
+        let newItem: ICartItem;
         for (const item of items) {
          let storageItem = storageItems.find(elem => elem.id === item.id) ;
 
           // @ts-ignore
           price = price + item.price * storageItem.count;
 
-          gifts.push(item);
+          newItem = {
+            ...item,
+            count: storageItem?.count ?? 1
+          }
+
+          gifts.push(newItem);
+
         }
 
         this.finalPrice.set(price);
