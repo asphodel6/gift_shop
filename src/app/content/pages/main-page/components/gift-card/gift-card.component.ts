@@ -5,6 +5,7 @@ import {NgOptimizedImage} from '@angular/common';
 import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
 import {StorageService} from '../../../../../../../public';
 import {Router} from '@angular/router';
+import {API_TOKEN} from '../../../../../auth/tokens/url.token';
 
 @Component({
   selector: 'gift-card',
@@ -21,6 +22,7 @@ export class GiftCardComponent {
   readonly ratingCount = input.required<number>();
   private readonly storageService = inject(StorageService);
   private readonly router = inject(Router);
+  readonly apiUrl = inject(API_TOKEN);
 
   readonly ratingDescription = computed(() => {
     if (this.ratingCount() > 10 && this.ratingCount() < 20 ) {
@@ -45,5 +47,13 @@ export class GiftCardComponent {
 
   protected navigateToGift(): void {
     this.router.navigate(['main/gift', this.id()]);
+  }
+
+  roundRating(number: number): string {
+    return (number % 1) === 0 ? number.toFixed(0) : number.toFixed(1);
+  }
+
+  getImage(url: string): string {
+    return `${this.apiUrl}api/file/${url}`
   }
 }

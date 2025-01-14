@@ -16,13 +16,14 @@
       [itemsCount]="4"
       class="carousel"
     >
-      @for (gift of gifts; track gift) {
+      @for (gift of gifts | async; track gift) {
         <div
           *tuiItem
           class="item"
         >
           <gift-card
             [id]="gift.id"
+            [image]="gift.file"
             [price]="gift.price"
             [ratingCount]="gift.ratingCount"
             [giftTitle]="gift.title"

@@ -1,7 +1,8 @@
 <div>
+  @if (mockGift) {
   <div class="gift">
     <div>
-      <img src="gift.png" width="405px" height="405px">
+      <img [src]="getImage(mockGift.file)" width="405px" height="405px">
     </div>
     <div>
       <div class="title">{{ mockGift.title }}</div>
@@ -9,7 +10,7 @@
         <div class="title-font">{{ mockGift.price }} {{ 'RUB' | tuiCurrency }}</div>
         <div class="rating-info">
           <img src="star.png" width="25px" height="24px">
-          <span class="rating">{{ mockGift.rating }}</span>
+          <span class="rating">{{ roundRating(mockGift.rating) }}</span>
           <span class="rating-count">({{ mockGift.ratingCount }} {{ ratingDescription }})</span>
         </div>
       </div>
@@ -47,6 +48,7 @@
       }
     </div>
   </div>
+  }
 </div>
 <div class="recommended">
   <recommended></recommended>

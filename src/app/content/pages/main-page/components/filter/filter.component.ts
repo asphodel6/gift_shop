@@ -2,8 +2,11 @@ import {Component, inject, input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TuiCheckbox} from '@taiga-ui/kit';
 import {TuiScrollbar, TuiTextfieldComponent, TuiTextfieldDirective, TuiTextfieldOptionsDirective} from '@taiga-ui/core';
-import {BehaviorSubject, distinctUntilChanged, map, Observable} from 'rxjs';
+import {BehaviorSubject, distinctUntilChanged, map, Observable, takeUntil} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {DestroyService} from '../../../../../services/destroy.service';
+import {IFilter} from './models/filter.interface';
+import {FilterService} from '../../service/filter.service';
 
 @Component({
   selector: 'filter',
@@ -22,13 +25,15 @@ import {AsyncPipe} from '@angular/common';
 })
 export class FilterComponent implements OnInit {
   readonly title = input.required<string>();
-  readonly items = input.required<string[]>();
+  readonly items = input.required<IFilter[]>();
 
   readonly searchFilterValue$ = new BehaviorSubject<string>('');
 
   readonly formBuilder = inject(FormBuilder);
+  readonly destroy$ = inject(DestroyService);
+  readonly filterService = inject(FilterService);
 
-  items$!: Observable<string[]>;
+  items$!: Observable<IFilter[]>;
 
   protected form!: FormGroup;
 
@@ -36,6 +41,8 @@ export class FilterComponent implements OnInit {
     this.initForm();
 
     this.initItems();
+
+    this.initListener();
   }
 
   updateSearchFilterValue(value: string): void {
@@ -49,18 +56,39 @@ export class FilterComponent implements OnInit {
     )
   }
 
-  filterCollection(items: string[], value: string): string[] {
+  filterCollection(items: IFilter[], value: string): IFilter[] {
     const re = new RegExp(value, 'i');
 
-    return items.filter(item => re.test(item));
+    return items.filter(item => re.test(item.name));
   }
 
   initForm(): void {
     this.form = this.formBuilder.group({});
 
-    for (let i = 0; i < this.items().length; i++) {
+    for (let item of this.items()) {
       const control = this.formBuilder.control(false);
-      this.form.addControl(i.toString(), control);
+      this.form.addControl(item.id, control);
     }
+  }
+
+  clearForm(): void {
+    for (let item of this.items()) {
+      this.form.get(item.id)?.setValue(false);
+    }
+  }
+
+  initListener(): void {
+    this.form.valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(value => {
+      let applyFilters = [];
+      for (let item in value) {
+        if (value[item]) {
+          applyFilters.push(item)
+        }
+      }
+
+      this.filterService.updateFilters(this.title(), applyFilters)
+    });
   }
 }

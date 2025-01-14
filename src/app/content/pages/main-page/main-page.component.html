@@ -21,6 +21,7 @@
       <button tuiButton
               size="m"
               appearance="beige-button"
+              (click)="applyFilters()"
       >
         Применить
       </button>
@@ -36,9 +37,10 @@
   <div>
     <div class="gifts-title">Популярные подарки</div>
     <div class="gifts-wrapper">
-      @for (gift of gifts; track gift) {
+      @for (gift of gifts(); track gift) {
         <gift-card
           [id]="gift.id"
+          [image]="gift.file"
           [price]="gift.price"
           [giftTitle]="gift.title"
           [rating]="gift.rating"

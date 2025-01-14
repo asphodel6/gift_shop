@@ -8,8 +8,10 @@ import {Router} from '@angular/router';
 import {RecommendedComponent} from '../../../../../public/shared/recommended/recommended.component';
 import {CartItemComponent} from './cart-item/cart-item.component';
 import {ICartItem} from './models/cart-item.interface';
-import {Subject, takeUntil} from 'rxjs';
+import {Subject, switchMap, takeUntil, withLatestFrom} from 'rxjs';
 import {MOCK_CART_ITEM, MOCK_GIFT} from '../../../../../public';
+import {GiftsService} from '../../../services/gifts.service';
+import {IGift} from '../../../../../public/shared/models/gift.interface';
 
 @Component({
   selector: 'shopping-cart',
@@ -27,13 +29,14 @@ import {MOCK_CART_ITEM, MOCK_GIFT} from '../../../../../public';
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   private readonly cartService = inject(ShoppingCartService);
   private readonly router = inject(Router);
+  readonly giftsService = inject(GiftsService);
   private readonly destroy$ = new Subject<void>();
 
   selectedAll = false;
 
   readonly count$ = this.cartService.count$;
   readonly storageItems$ = this.cartService.cartItems$;
-  readonly cartItems = signal<ICartItem[]>([]);
+  readonly cartItems = signal<IGift[]>([]);
 
   readonly orderLabels = ['Количество товаров',
     'Стоимость доставки',
@@ -52,18 +55,23 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.storageItems$.pipe(takeUntil(this.destroy$))
-      .subscribe(items => {
-        const gifts: ICartItem[] = [];
+    this.storageItems$.pipe(takeUntil(this.destroy$),
+      switchMap(items =>
+        this.giftsService.getGiftsByIds(items.map(item => item.id)).pipe(
+          withLatestFrom(this.storageItems$)
+        )
+      )
+      )
+      .subscribe(([items, storageItems]) => {
+        const gifts: IGift[] = [];
         let price = 0;
         for (const item of items) {
-          const mockItem = {...MOCK_CART_ITEM};
-          mockItem.id = item.id;
-          mockItem.count = item.count;
+         let storageItem = storageItems.find(elem => elem.id === item.id) ;
 
-          price = price + mockItem.price * mockItem.count;
+          // @ts-ignore
+          price = price + item.price * storageItem.count;
 
-          gifts.push(mockItem);
+          gifts.push(item);
         }
 
         this.finalPrice.set(price);

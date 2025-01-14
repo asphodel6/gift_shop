@@ -12,16 +12,16 @@
   </div>
   <form [formGroup]="form" class="filters">
     <tui-scrollbar class="scroll">
-    @for (item of items$ | async; track item; let index = $index) {
+    @for (item of items$ | async; track item) {
         <label class="filter">
           <input
             size="m"
             class="checkbox"
             tuiCheckbox
             type="checkbox"
-            [formControlName]="index"
+            [formControlName]="item.id"
           />
-          {{ item }}
+          {{ item.name }}
         </label>
     }
     </tui-scrollbar>

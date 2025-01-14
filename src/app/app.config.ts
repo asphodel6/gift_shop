@@ -6,7 +6,7 @@ import { routes } from './app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {JwtModule} from '@auth0/angular-jwt';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-import {URL_TOKEN} from './auth/tokens/url.token';
+import {API_TOKEN, URL_TOKEN} from './auth/tokens/url.token';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -27,6 +27,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: URL_TOKEN,
       useValue: 'http://gifts-shop.work.gd/api'
+    },
+    {
+      provide: API_TOKEN,
+      useValue: 'http://terrestrial-dev.duckdns.org:8080/'
     }
   ]
 };
